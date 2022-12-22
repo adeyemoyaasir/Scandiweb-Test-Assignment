@@ -1,3 +1,4 @@
+<?php include_once('../private/initialize.php'); ?>
 <?php $page_title = 'Product List'; ?>
 <?php include('../private/shared/head.php'); ?>
 <body>
