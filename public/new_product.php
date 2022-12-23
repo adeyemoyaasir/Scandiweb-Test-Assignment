@@ -26,17 +26,27 @@
       <option value="book" id='Book'>Book</option>
       <option value="furniture" id='Furniture'>Furniture</option>
     </select>
-    <label for="size">Size (MB)</label>
-    <input type="number" name='size' id='size'>
-    <label for="weight">Weight (KG)</label>
-    <input type="number" name='weight_kg' id='weight'>
-    <label for="height">Height (CM)</label>
-    <input type="number" name='height' id='height'>
-    <label for="width">Width (CM)</label>
-    <input type="number" name='width' id='width'>
-    <label for="length">Length (CM)</label>
-    <input type="number" name='length' id='length'>
+    <div id='size-container'>
+      <label for="size">Size (MB)</label>
+      <input type="number" name='size' id='size'>
+    </div>
+    <div id='weight-container'>
+      <label for="weight">Weight (KG)</label>
+      <input type="number" name='weight_kg' id='weight'>
+    </div>
+    <div id='dimensions-container'>
+      <label for="height">Height (CM)</label>
+      <input type="number" name='height' id='height'>
+      <label for="width">Width (CM)</label>
+      <input type="number" name='width' id='width'>
+      <label for="length">Length (CM)</label>
+      <input type="number" name='length' id='length'>
+    </div>
   </form>
 <?php include('../private/shared/footer.php'); ?>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
+<script src='./script.js'></script>
 </body>
 </html>

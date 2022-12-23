@@ -9,10 +9,10 @@ body {
   height: 100vh;
 }
 
-#product_form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 300px;
+#weight-container {
+  display: none;
 }
-  
+
+footer {
+  background: blue;
+}
