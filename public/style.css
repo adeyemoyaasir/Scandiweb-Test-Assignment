@@ -9,10 +9,12 @@ body {
   height: 100vh;
 }
 
-#weight-container {
-  display: none;
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
 
-footer {
-  background: blue;
+#weight-container, #dimensions-container {
+  display: none;
 }
