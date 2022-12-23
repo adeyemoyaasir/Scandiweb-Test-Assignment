@@ -1,3 +1,4 @@
+// Display the correct form input according to the product type
 $(document).ready(() => {
   $('select').change(() => {
     const VALUE = $('select option:selected');

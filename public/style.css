@@ -12,9 +12,10 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 600px;
 }
 
+/* By default these inputs are hidden */
 #weight-container, #dimensions-container {
   display: none;
 }

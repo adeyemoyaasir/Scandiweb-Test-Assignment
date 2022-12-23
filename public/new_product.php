@@ -16,31 +16,35 @@
   </header>
   <form action="" id='product_form' method='POST'>
     <label for="sku">SKU</label>
-    <input type="text" name="sku" id='sku'>
+    <input type="text" name="sku" id='sku' placeholder="VKR12345">
     <label for="name">Name</label>
-    <input type="text" name='name' id='name'>
-    <label for="price">Price</label>
-    <input type="number" name='price' id='price'>
+    <input type="text" name='name' id='name' placeholder='Product name'>
+    <label for="price">Price ($)</label>
+    <input type="number" name='price' id='price' placeholder="0.0">
+    <label for="productType">Type Switcher</label>
     <select name="typeSwitcher" id="productType">
       <option value="dvd" id='DVD'>DVD</option>
       <option value="book" id='Book'>Book</option>
       <option value="furniture" id='Furniture'>Furniture</option>
     </select>
     <div id='size-container'>
+      <p>Please provide a size in megabyte (MB).</p>
       <label for="size">Size (MB)</label>
-      <input type="number" name='size' id='size'>
+      <input type="number" name='size' id='size' placeholder='0'>
     </div>
     <div id='weight-container'>
+      <p>Please provide a weight in kilograms (KG).</p>
       <label for="weight">Weight (KG)</label>
-      <input type="number" name='weight_kg' id='weight'>
+      <input type="number" name='weight_kg' id='weight' placeholder='0.0'>
     </div>
     <div id='dimensions-container'>
+      <p>Please provide dimensions in HxWxL (height/width/length) format.</p>
       <label for="height">Height (CM)</label>
-      <input type="number" name='height' id='height'>
+      <input type="number" name='height' id='height' placeholder='0'>
       <label for="width">Width (CM)</label>
-      <input type="number" name='width' id='width'>
+      <input type="number" name='width' id='width' placeholder='0'>
       <label for="length">Length (CM)</label>
-      <input type="number" name='length' id='length'>
+      <input type="number" name='length' id='length' placeholder='0'>
     </div>
   </form>
 <?php include('../private/shared/footer.php'); ?>
