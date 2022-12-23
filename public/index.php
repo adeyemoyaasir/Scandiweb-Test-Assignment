@@ -1,8 +1,10 @@
 <?php
 
- use MyApp\classes\Product;
+use MyApp\classes\Product;
 
- include_once('../private/initialize.php'); 
+include_once('../private/initialize.php'); 
+
+$products = Product::select_all();
  
  ?>
  <!-- Have different page title for each page -->
@@ -20,21 +22,20 @@
   </header>
   <main>
   <!-- Get all the products from the database and display them -->
-  <?php $products = Product::select_all(); ?>
   <?php foreach ($products as $product) { ?>
    <div class='product'>
     <input type="checkbox" name="checkbox" class="delete-checkbox">
     <div class='product-info'>
-      <span><?= $product['sku']; ?></span>
-      <span><?= $product['name']; ?></span>
-      <span><?= $product['price']; ?></span>
+      <span><?= $product->sku; ?></span>
+      <span><?= $product->name; ?></span>
+      <span><?= $product->price; ?></span>
       <span><?php
-        echo $product['weight_kg'] != 0 ? "Weight: " . $product['weight_kg'] . "KG" : '';
+        echo $product->weight_kg != 0.0 ? "Weight: " . $product->weight_kg . "KG" : '';
 
-        echo $product['size'] != 0 ?  "Size: " . $product['size'] . "MB" : '';
+        echo $product->size != 0 ?  "Size: " . $product->size . "MB" : '';
 
-        echo $product['dimensions'] != '0' ? 
-        "Dimension: " . extract_from_database_array($product['dimensions']): '';
+        echo $product->dimensions != '0' ? 
+        "Dimension: " . extract_from_database_array($product->dimensions): '';
        ?>
        </span>
     </div>

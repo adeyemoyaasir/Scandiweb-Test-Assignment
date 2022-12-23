@@ -1,5 +1,5 @@
-/* Create database called scandiweb_test_products */
-CREATE DATABASE scandiweb_test_products;
+/* Create database called scandiweb_test_project */
+CREATE DATABASE scandiweb_test_project;
 
 /* Use the database */
 USE scandiweb_test_products;

@@ -1,4 +1,32 @@
 <?php include_once('../private/initialize.php'); ?>
+<?php
+
+use MyApp\classes\DVD;
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  create_instance_by_type();
+  // $args = [];
+  // $args['sku'] = $_POST['sku'] ?? NULL;
+  // $args['name'] = $_POST['name'] ?? NULL;
+  // $args['price'] = $_POST['price'] ?? NULL;
+  // $args['weight_kg'] = $_POST['weight_kg'] ?? NULL;
+  // $args['size'] = $_POST['size'] ?? NULL;
+  // $args['width'] = $_POST['width'] ?? NULL;
+  // $args['length'] = $_POST['length'] ?? NULL;
+  // $args['height'] = $_POST['height'] ?? NULL;
+
+  // $book = new DVD($args);
+  // $result = $book->save();
+
+  // if ($result === true) {
+  //   header("Location: index.php");
+  //   exit;
+  // }
+} else {
+  $book = [];
+}
+
+?>
 <!-- Have different page title for each page -->
 <?php $page_title = 'Product Add'; ?>
 <?php include('../private/shared/head.php'); ?>
@@ -7,7 +35,7 @@
     <nav>
       <h1>Product Add</h1>
       <div id='form-buttons'>
-        <button >Save</button>
+        <button id="submit" type="submit" form='product_form' >Save</button>
         <a href="./index.php">
           <button type='button'>Cancel</button>
         </a>
