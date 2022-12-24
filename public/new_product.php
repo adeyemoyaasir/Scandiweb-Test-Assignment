@@ -1,32 +1,5 @@
 <?php include_once('../private/initialize.php'); ?>
-<?php
 
-use MyApp\classes\DVD;
-
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-  create_instance_by_type();
-  // $args = [];
-  // $args['sku'] = $_POST['sku'] ?? NULL;
-  // $args['name'] = $_POST['name'] ?? NULL;
-  // $args['price'] = $_POST['price'] ?? NULL;
-  // $args['weight_kg'] = $_POST['weight_kg'] ?? NULL;
-  // $args['size'] = $_POST['size'] ?? NULL;
-  // $args['width'] = $_POST['width'] ?? NULL;
-  // $args['length'] = $_POST['length'] ?? NULL;
-  // $args['height'] = $_POST['height'] ?? NULL;
-
-  // $book = new DVD($args);
-  // $result = $book->save();
-
-  // if ($result === true) {
-  //   header("Location: index.php");
-  //   exit;
-  // }
-} else {
-  $book = [];
-}
-
-?>
 <!-- Have different page title for each page -->
 <?php $page_title = 'Product Add'; ?>
 <?php include('../private/shared/head.php'); ?>
@@ -42,13 +15,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
     </nav>
   </header>
+  <?php
+     
+      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        echo validate_inputs();
+      } 
+  ?>
   <form action="" id='product_form' method='POST'>
     <label for="sku">SKU</label>
-    <input type="text" name="sku" id='sku' placeholder="VKR12345">
+    <input type="text" name="sku" id='sku' maxlength='9' placeholder="VKR12345" value="<?= $_POST['sku'] ?? '';  ?>">
     <label for="name">Name</label>
-    <input type="text" name='name' id='name' placeholder='Product name'>
+    <input type="text" name='name' id='name' maxlength="30" placeholder='Product name' value="<?= $_POST['name'] ?? ''; ?>">
     <label for="price">Price ($)</label>
-    <input type="number" name='price' id='price' placeholder="0.0">
+    <input type="text" name='price' id='price' placeholder="0.0" value="<?= $_POST['price'] ?? ''; ?>">
     <label for="productType">Type Switcher</label>
     <select name="typeSwitcher" id="productType">
       <option value="dvd" id='DVD'>DVD</option>
@@ -58,21 +37,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div id='size-container'>
       <p>Please provide a size in megabyte (MB).</p>
       <label for="size">Size (MB)</label>
-      <input type="number" name='size' id='size' placeholder='0'>
+      <input type="number" name='size' id='size' placeholder='0' value="<?= $_POST['size'] ?? ''; ?>">
     </div>
     <div id='weight-container'>
       <p>Please provide a weight in kilograms (KG).</p>
       <label for="weight">Weight (KG)</label>
-      <input type="number" name='weight_kg' id='weight' placeholder='0.0'>
+      <input type="text" name='weight_kg' id='weight' placeholder='0.0' value="<?= $_POST['weight_kg'] ?? ''; ?>">
     </div>
     <div id='dimensions-container'>
       <p>Please provide dimensions in HxWxL (height/width/length) format.</p>
       <label for="height">Height (CM)</label>
-      <input type="number" name='height' id='height' placeholder='0'>
+      <input type="text" name='height' id='height' placeholder='0' value="<?= $_POST['height'] ?? ''; ?>">
       <label for="width">Width (CM)</label>
-      <input type="number" name='width' id='width' placeholder='0'>
+      <input type="text" name='width' id='width' placeholder='0' value="<?= $_POST['width'] ?? ''; ?>">
       <label for="length">Length (CM)</label>
-      <input type="number" name='length' id='length' placeholder='0'>
+      <input type="text" name='length' id='length' placeholder='0' value="<?= $_POST['length'] ?? ''; ?>">
     </div>
   </form>
 <?php include('../private/shared/footer.php'); ?>

@@ -1,11 +1,12 @@
 // Display the correct form input according to the product type
-$(document).ready(() => {
-  $('select').change(() => {
-    const VALUE = $('select option:selected');
-    const SIZE_CONTAINER = $('#size-container');
-    const WEIGHT_CONTAINER = $('#weight-container');
-    const DIMENSIONS_CONTAINER = $('#dimensions-container');
 
+$(document).ready(() => {
+  const VALUE = $('select option:selected');
+  const SIZE_CONTAINER = $('#size-container');
+  const WEIGHT_CONTAINER = $('#weight-container');
+  const DIMENSIONS_CONTAINER = $('#dimensions-container');
+
+  $('select').on('change', () => {
     if (VALUE.text() === 'Book') {
       WEIGHT_CONTAINER.show();
       SIZE_CONTAINER.hide();

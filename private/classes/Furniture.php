@@ -7,17 +7,16 @@ class Furniture extends Product {
   static protected $columns = ['id', 'sku', 'name', 'price', 'dimensions'];
 
   public function save() {
-    $attributes = $this->attributes();
+    $attributes = $this->sanitized_attributes();
     $sql = "INSERT INTO products (";
     $sql .= join(', ', array_keys($attributes));
     $sql .= ") VALUES (";
     $sql .= "'" . $this->sku . "', ";
     $sql .= "'" . $this->name . "', ";
     $sql .= "'" . $this->price . "', ";
-    $sql .= "'[" . $this->width . ", "; 
-    $sql .= $this->length . ", ";
-    $sql .= $this->height . "]'";
-    // $sql .= join("', '", array_values($attributes));
+    $sql .= "'[" . $this->height . ", "; 
+    $sql .= $this->width . ", ";
+    $sql .= $this->length . "]'";
     $sql .= ")";
     $result = self::$database->query($sql);
     if($result) {

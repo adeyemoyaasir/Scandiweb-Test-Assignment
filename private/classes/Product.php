@@ -4,15 +4,17 @@ namespace MyApp\classes;
 
 class Product
 {
-  // ----- START OF ACTIVE RECORD CODE ------
   static protected $database;
   static protected $columns = [];
 
+  // Set the database
   static public function set_database($database) {
     self::$database = $database;
   }
 
-  static public function find_by_sql($sql) {
+  // Select all items from the database
+  static public function select_all() {
+    $sql = "SELECT * FROM products";
     $result = self::$database->query($sql);
     if(!$result) {
       exit("Database query failed.");
@@ -29,11 +31,7 @@ class Product
     return $object_array;
   }
 
-  static public function select_all() {
-    $sql = "SELECT * FROM products";
-    return self::find_by_sql($sql);
-  }
-
+  // Create objects from the database items
   static protected function instantiate($record) {
     $object = new self;
     foreach($record as $property => $value) {
@@ -44,24 +42,7 @@ class Product
     return $object;
   }
 
-  // public function save() {
-  //   $attributes = $this->attributes();
-  //   $sql = "INSERT INTO products (";
-  //   $sql .= join(', ', array_keys($attributes));
-  //   $sql .= ") VALUES (";
-  //   $sql .= "'" . $this->sku . "', ";
-  //   $sql .= "'" . $this->name . "', ";
-  //   $sql .= "'" . $this->price . "', ";
-  //   $sql .= "'" . $this->size . "'";
-  //   // $sql .= join("', '", array_values($attributes));
-  //   $sql .= ")";
-  //   $result = self::$database->query($sql);
-  //   if($result) {
-  //     $this->id = self::$database->insert_id;
-  //   }
-  //   return $result;
-  // }
-
+  // Get the columns and their values for the given class
   public function attributes()
   {
     $attributes = [];
@@ -74,16 +55,30 @@ class Product
     return $attributes;
   }
 
-  // protected function sanitized_attributes()
-  // {
-  //   $sanitized = [];
-  //   foreach ($this->attributes() as $key => $value) {
-  //     $sanitized[$key] = self::$database->escape_string($value);
-  //   }
-  //   return $sanitized;
-  // }
+  // Escape the values to make sure they can be used in a SQL statement
+  protected function sanitized_attributes()
+  {
+    $sanitized = [];
+    foreach ($this->attributes() as $key => $value) {
+      $sanitized[$key] = self::$database->real_escape_string($value);
+    }
+    return $sanitized;
+  }
 
-  // ----- END OF ACTIVE RECORD CODE ------
+  // Save the items into the database
+  public function save() {
+    $attributes = $this->sanitized_attributes();
+    $sql = "INSERT INTO products (";
+    $sql .= join(', ', array_keys($attributes));
+    $sql .= ") VALUES ('";
+    $sql .= join("', '", array_values($attributes));
+    $sql .= "')";
+    $result = self::$database->query($sql);
+    if($result) {
+      $this->id = self::$database->insert_id;
+    }
+    return $result;
+  }
 
   public $id;
   public $sku;
@@ -95,13 +90,6 @@ class Product
   public $length = 0;
   public $height = 0;
   public $dimensions;
-
-  // public function __construct($args=[]) {
-  //   $this->sku = $args['sku'] ?? '';
-  //   $this->name = $args['name'] ?? '';
-  //   $this->price = $args['price'] ?? '';
-  //   $this->size = $args['size'] ?? '';
-  // }
 }
 
 ?>
