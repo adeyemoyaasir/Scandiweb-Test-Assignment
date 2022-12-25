@@ -57,7 +57,7 @@ function validate_inputs() {
 
   foreach($inputs as $input) {
     if (empty($_POST[$input])) {  
-      $errors[] = "{$input} can't be empty.";
+      $errors[] = ucfirst($input) . " can't be empty.";
     }
   }
 
@@ -105,6 +105,7 @@ function select_instance() {
     }
   }
 
+  // Get the selected type
   function get_selected_type($type) {
     if(isset($_POST['typeSwitcher']) && $_POST['typeSwitcher'] == $type) {
     echo 'selected';
