@@ -30,9 +30,9 @@
     <input type="text" name='price' id='price' placeholder="0.0" value="<?= $_POST['price'] ?? ''; ?>">
     <label for="productType">Type Switcher</label>
     <select name="typeSwitcher" id="productType">
-      <option value="dvd" id='DVD'>DVD</option>
-      <option value="book" id='Book'>Book</option>
-      <option value="furniture" id='Furniture'>Furniture</option>
+      <option value="dvd" id='DVD' <?= get_selected_type('dvd'); ?> >DVD</option>
+      <option value="book" id='Book' <?= get_selected_type('book'); ?> >Book</option>
+      <option value="furniture" id='Furniture' <?= get_selected_type('furniture'); ?> >Furniture</option>
     </select>
     <div id='size-container'>
       <p>Please provide a size in megabyte (MB).</p>

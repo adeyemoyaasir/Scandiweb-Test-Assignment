@@ -104,3 +104,9 @@ function select_instance() {
       exit;
     }
   }
+
+  function get_selected_type($type) {
+    if(isset($_POST['typeSwitcher']) && $_POST['typeSwitcher'] == $type) {
+    echo 'selected';
+    }
+  }
