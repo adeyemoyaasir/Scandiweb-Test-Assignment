@@ -37,21 +37,21 @@
     <div id='size-container'>
       <p>Please provide a size in megabyte (MB).</p>
       <label for="size">Size (MB)</label>
-      <input type="text" name='size' id='size' placeholder='0' value="<?= $_POST['size'] ?? ''; ?>">
+      <input type="text" name='size' id='size' placeholder='0' maxlength='5' value="<?= $_POST['size'] ?? ''; ?>">
     </div>
     <div id='weight-container'>
       <p>Please provide a weight in kilograms (KG).</p>
       <label for="weight">Weight (KG)</label>
-      <input type="text" name='weight_kg' id='weight' placeholder='0.0' value="<?= $_POST['weight_kg'] ?? ''; ?>">
+      <input type="text" name='weight_kg' id='weight' placeholder='0.0' maxlength='3' value="<?= $_POST['weight_kg'] ?? ''; ?>">
     </div>
     <div id='dimensions-container'>
       <p>Please provide dimensions in HxWxL (height/width/length) format.</p>
       <label for="height">Height (CM)</label>
-      <input type="text" name='height' id='height' placeholder='0' value="<?= $_POST['height'] ?? ''; ?>">
+      <input type="text" name='height' id='height' placeholder='0' maxlength='5' value="<?= $_POST['height'] ?? ''; ?>">
       <label for="width">Width (CM)</label>
-      <input type="text" name='width' id='width' placeholder='0' value="<?= $_POST['width'] ?? ''; ?>">
+      <input type="text" name='width' id='width' placeholder='0' maxlength='5' value="<?= $_POST['width'] ?? ''; ?>">
       <label for="length">Length (CM)</label>
-      <input type="text" name='length' id='length' placeholder='0' value="<?= $_POST['length'] ?? ''; ?>">
+      <input type="text" name='length' id='length' placeholder='0' maxlength='5' value="<?= $_POST['length'] ?? ''; ?>">
     </div>
   </form>
 <?php include('../private/shared/footer.php'); ?>
