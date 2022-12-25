@@ -5,6 +5,12 @@ use MyApp\classes\Product;
 include_once('../private/initialize.php'); 
 
 $products = Product::select_all();
+
+// Delete the selected items
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteId'])) {
+
+  Product::delete();
+}
  
  ?>
  <!-- Have different page title for each page -->
@@ -16,16 +22,16 @@ $products = Product::select_all();
       <h1>Product List</h1>
       <div id='nav-buttons'>
        <a href="./new_product.php"><button id='add-product-btn' type='button'>ADD</button></a> 
-        <button id='delete-product-btn' type='button'>MASS DELETE</button>
+        <button id='delete-product-btn' form='product_list' type='submit' name='delete'>MASS DELETE</button>
       </div>
     </nav>
   </header>
   <main>
   <!-- Get all the products from the database and display them -->
+  <form action="" id='product_list' method='POST'>
   <?php foreach ($products as $product) { ?>
-   <div class='product'>
-    <input type="checkbox" name="checkbox" class="delete-checkbox">
-    <div class='product-info'>
+    <input type="checkbox" name="deleteId[]" value="<?= $product->id ?>" class="delete-checkbox">
+    <div class='product-info'> 
       <span><?= $product->sku; ?></span>
       <span><?= $product->name; ?></span>
       <span><?= $product->price; ?></span>
@@ -38,9 +44,9 @@ $products = Product::select_all();
         "Dimension: " . extract_from_database_array($product->dimensions): '';
        ?>
        </span>
-    </div>
    </div>
    <?php }; ?>
+   </form>
   </main>
 <?php include('../private/shared/footer.php'); ?>
 </body>

@@ -80,6 +80,20 @@ class Product
     return $result;
   }
 
+  // Delete item from database
+  static public function delete() {
+    $selected = $_POST['deleteId'];
+    $extracted_id = implode(',', $selected);
+  
+    $sql = "DELETE FROM products ";
+    $sql .= "WHERE id IN(" . $extracted_id . ")";
+    $result = self::$database->query($sql);
+  
+    if($result) {
+      header("Location: index.php");
+    }
+  }
+
   public $id;
   public $sku;
   public $name;
