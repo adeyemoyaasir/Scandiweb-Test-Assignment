@@ -61,6 +61,16 @@ function validate_inputs() {
     }
   }
 
+  // Check if the sku already exists in the database
+  global $database;
+
+  $sql = "SELECT * FROM products ";
+  $sql .= "WHERE sku='" . $_POST['sku'] . "'";
+  $result = $database->query($sql);
+  if(mysqli_num_rows($result) > 0) {
+    $errors[] = "This SKU already exists. Please, provide a unique stock keeping unit (SKU).";
+  }
+
   if(!empty($_POST['price']) && !is_numeric($_POST['price'])) {
     $errors[] = "Please, provide a numeric value for the price.";
   }
