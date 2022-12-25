@@ -56,9 +56,19 @@ function validate_inputs() {
   $inputs = get_current_inputs();
 
   foreach($inputs as $input) {
-    if (empty($_POST[$input])) {  
+    if (empty($_POST[$input]) || trim($_POST[$input]) == '') {  
       $errors[] = ucfirst($input) . " can't be empty.";
     }
+  }
+
+  // Check if the input strings include special characters
+  $pattern = "/^[a-zA-Z0-9]*$/";
+  if(preg_match($pattern, $_POST['sku']) === 0) {
+    $errors[] = "Please, include only letters, numbers or the combination of both in the SKU.";
+  }
+
+  if(preg_match($pattern, $_POST['name']) === 0) {
+    $errors[] = "Please, include only letters, numbers or the combination of both in the Name.";
   }
 
   // Check if the sku already exists in the database
