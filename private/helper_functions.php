@@ -61,6 +61,31 @@ function validate_inputs() {
     }
   }
 
+  if(!empty($_POST['price']) && !is_numeric($_POST['price'])) {
+    $errors[] = "Please, provide a numeric value for the price.";
+  }
+
+  if(!empty($_POST['size']) && !is_numeric($_POST['size'])) {
+    $errors[] = "Please, provide a numeric value for the size.";
+  }
+
+  if(!empty($_POST['weight_kg']) && !is_numeric($_POST['weight_kg'])) {
+    $errors[] = "Please, provide a numeric value for the weight.";
+  }
+
+  if(!empty($_POST['length']) && !is_numeric($_POST['length'])) {
+    $errors[] = "Please, provide a numeric value for the length.";
+  }
+
+  if(!empty($_POST['width']) && !is_numeric($_POST['width'])) {
+    $errors[] = "Please, provide a numeric value for the width.";
+  }
+
+  if(!empty($_POST['height']) && !is_numeric($_POST['height'])) {
+    $errors[] = "Please, provide a numeric value for the height.";
+  }
+
+
     if(!empty($errors)) {
       return display_errors($errors);
     } else {

@@ -37,7 +37,7 @@
     <div id='size-container'>
       <p>Please provide a size in megabyte (MB).</p>
       <label for="size">Size (MB)</label>
-      <input type="number" name='size' id='size' placeholder='0' value="<?= $_POST['size'] ?? ''; ?>">
+      <input type="text" name='size' id='size' placeholder='0' value="<?= $_POST['size'] ?? ''; ?>">
     </div>
     <div id='weight-container'>
       <p>Please provide a weight in kilograms (KG).</p>
