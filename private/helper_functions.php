@@ -104,13 +104,3 @@ function select_instance() {
       exit;
     }
   }
-
-  function get_selected_type($type) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      if ($_POST['typeSwitcher'] == $type) {
-        echo 'selected';
-      }
-    } else {
-      
-    }
-  }
