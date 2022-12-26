@@ -1,5 +1,50 @@
 <?php include_once('../private/initialize.php'); ?>
+<?php
 
+
+use MyApp\classes\Book;
+use MyApp\classes\DVD;
+use MyApp\classes\Furniture;
+
+$errors = validate_inputs();
+
+if(isset($_POST['submit']) && empty($errors)){
+  $result = '';
+  $args = [];
+  $args['sku'] = $_POST['sku'] ?? NULL;
+  $args['name'] = $_POST['name'] ?? NULL;
+  $args['price'] = $_POST['price'] ?? NULL;
+  $args['weight_kg'] = $_POST['weight_kg'] ?? NULL;
+  $args['size'] = $_POST['size'] ?? NULL;
+  $args['width'] = $_POST['width'] ?? NULL;
+  $args['length'] = $_POST['length'] ?? NULL;
+  $args['height'] = $_POST['height'] ?? NULL;
+
+  if ($_POST['weight_kg'] != NULL) {
+    $book = new Book($args);
+    $result = $book->save();
+    
+  }
+
+  if ($_POST['size'] != NULL) {
+    $dvd = new DVD($args);
+    $result = $dvd->save();
+  }
+
+  if ($_POST['width'] != NULL && $_POST['length'] != NULL && $_POST['height'] != NULL) {
+    $furniture = new Furniture($args);
+    $result = $furniture->save(); 
+  }
+
+  if ($result === true) {
+    header('Location: index.php');
+    exit;
+  } else {
+  
+  }
+}
+
+?>
 <!-- Have different page title for each page -->
 <?php $page_title = 'Product Add'; ?>
 <?php include('../private/shared/head.php'); ?>
@@ -8,19 +53,14 @@
     <nav>
       <h1>Product Add</h1>
       <div id='form-buttons'>
-        <button id="submit" type="submit" form='product_form' >Save</button>
+        <button name='submit' id="submit" type="submit" form='product_form' >Save</button>
         <a href="./index.php">
           <button type='button'>Cancel</button>
         </a>
       </div>
     </nav>
   </header>
-  <?php
-     
-      if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        echo validate_inputs();
-      } 
-  ?>
+  <?= $errors ;?>
   <form action="" id='product_form' method='POST'>
     <label for="sku">SKU</label>
     <input type="text" name="sku" id='sku' maxlength='9' placeholder="VKR12345" value="<?= $_POST['sku'] ?? '';  ?>">

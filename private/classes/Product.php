@@ -103,7 +103,7 @@ class Product
   public $width = 0;
   public $length = 0;
   public $height = 0;
-  public $dimensions;
+  public $dimensions = '';
 }
 
 ?>

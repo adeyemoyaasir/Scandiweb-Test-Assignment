@@ -1,9 +1,5 @@
 <?php
 
-use MyApp\classes\Book;
-use MyApp\classes\DVD;
-use MyApp\classes\Furniture;
-
 // The furniture dimensions in the database are set in this format: '[number, number, number]'.
 // With the helper function I remove the square brackets and converting it to a string format: e.g.: 12x23x45
 function extract_from_database_array($string) {
@@ -53,102 +49,66 @@ function get_current_inputs() {
 // Validate inputs
 function validate_inputs() {
   $errors = [];
-  $inputs = get_current_inputs();
 
-  foreach($inputs as $input) {
-    if (empty($_POST[$input]) || trim($_POST[$input]) == '') {  
-      $errors[] = ucfirst($input) . " can't be empty.";
+  if (isset($_POST['submit'])) {
+    $inputs = get_current_inputs();
+
+    foreach ($inputs as $input) {
+      if (empty($_POST[$input]) || trim($_POST[$input]) == '') {
+        $errors[] = ucfirst($input) . " can't be empty.";
+      }
     }
-  }
 
-  // Check if the input strings include special characters
-  $pattern = "/^[a-zA-Z0-9]*$/";
-  if(preg_match($pattern, $_POST['sku']) === 0) {
-    $errors[] = "Please, include only letters, numbers or the combination of both in the SKU.";
-  }
+    // Check if the input strings include special characters
+    $pattern = "/^[a-zA-Z0-9]*$/";
+    if (preg_match($pattern, $_POST['sku']) === 0) {
+      $errors[] = "Please, include only letters, numbers or the combination of both in the SKU.";
+    }
 
-  if(preg_match($pattern, $_POST['name']) === 0) {
-    $errors[] = "Please, include only letters, numbers or the combination of both in the Name.";
-  }
+    if (preg_match($pattern, $_POST['name']) === 0) {
+      $errors[] = "Please, include only letters, numbers or the combination of both in the Name.";
+    }
 
-  // Check if the sku already exists in the database
-  global $database;
+    // Check if the sku already exists in the database
+    global $database;
 
-  $sql = "SELECT * FROM products ";
-  $sql .= "WHERE sku='" . $_POST['sku'] . "'";
-  $result = $database->query($sql);
-  if(mysqli_num_rows($result) > 0) {
-    $errors[] = "This SKU already exists. Please, provide a unique stock keeping unit (SKU).";
-  }
+    $sql = "SELECT * FROM products ";
+    $sql .= "WHERE sku='" . $_POST['sku'] . "'";
+    $result = $database->query($sql);
+    if (mysqli_num_rows($result) > 0) {
+      $errors[] = "This SKU already exists. Please, provide a unique stock keeping unit (SKU).";
+    }
 
-  if(!empty($_POST['price']) && !is_numeric($_POST['price'])) {
-    $errors[] = "Please, provide a numeric value for the price.";
-  }
+    if (!empty($_POST['price']) && !is_numeric($_POST['price'])) {
+      $errors[] = "Please, provide a numeric value for the price.";
+    }
 
-  if(!empty($_POST['size']) && !is_numeric($_POST['size'])) {
-    $errors[] = "Please, provide a numeric value for the size.";
-  }
+    if (!empty($_POST['size']) && !is_numeric($_POST['size'])) {
+      $errors[] = "Please, provide a numeric value for the size.";
+    }
 
-  if(!empty($_POST['weight_kg']) && !is_numeric($_POST['weight_kg'])) {
-    $errors[] = "Please, provide a numeric value for the weight.";
-  }
+    if (!empty($_POST['weight_kg']) && !is_numeric($_POST['weight_kg'])) {
+      $errors[] = "Please, provide a numeric value for the weight.";
+    }
 
-  if(!empty($_POST['length']) && !is_numeric($_POST['length'])) {
-    $errors[] = "Please, provide a numeric value for the length.";
-  }
+    if (!empty($_POST['length']) && !is_numeric($_POST['length'])) {
+      $errors[] = "Please, provide a numeric value for the length.";
+    }
 
-  if(!empty($_POST['width']) && !is_numeric($_POST['width'])) {
-    $errors[] = "Please, provide a numeric value for the width.";
-  }
+    if (!empty($_POST['width']) && !is_numeric($_POST['width'])) {
+      $errors[] = "Please, provide a numeric value for the width.";
+    }
 
-  if(!empty($_POST['height']) && !is_numeric($_POST['height'])) {
-    $errors[] = "Please, provide a numeric value for the height.";
-  }
+    if (!empty($_POST['height']) && !is_numeric($_POST['height'])) {
+      $errors[] = "Please, provide a numeric value for the height.";
+    }
 
 
-    if(!empty($errors)) {
+    if (!empty($errors)) {
       return display_errors($errors);
-    } else {
-      select_instance();
+    } 
   }
 }
-
-// Select a Book/DVD/Furniture instance based on the size/weight/dimension values
-function select_instance() {
-    $args = [];
-    $args['sku'] = $_POST['sku'] ?? NULL;
-    $args['name'] = $_POST['name'] ?? NULL;
-    $args['price'] = $_POST['price'] ?? NULL;
-    $args['weight_kg'] = $_POST['weight_kg'] ?? NULL;
-    $args['size'] = $_POST['size'] ?? NULL;
-    $args['width'] = $_POST['width'] ?? NULL;
-    $args['length'] = $_POST['length'] ?? NULL;
-    $args['height'] = $_POST['height'] ?? NULL;
-
-    if ($_POST['weight_kg'] != NULL) {
-      $book = new Book($args);
-      create_instance($book);
-    }
-
-    if ($_POST['size'] != NULL) {
-      $dvd = new DVD($args);
-      create_instance($dvd);
-    }
-
-    if ($_POST['width'] != NULL && $_POST['length'] != NULL && $_POST['height'] != NULL) {
-      $furniture = new Furniture($args);
-      create_instance($furniture);
-    }
-  }
-
-  // Create the instances
-  function create_instance($obj) {
-    $result = $obj->save();
-    if ($result === true) {
-      header("Location: index.php");
-      exit;
-    }
-  }
 
   // Get the selected type
   function get_selected_type($type) {

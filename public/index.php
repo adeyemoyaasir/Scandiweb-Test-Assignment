@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deleteId'])) {
         echo $product->size != 0 ?  "Size: " . $product->size . "MB" : '';
 
         echo $product->dimensions != '0' ? 
-        "Dimension: " . extract_from_database_array($product->dimensions): '';
+        "Dimensions: " . extract_from_database_array($product->dimensions): '';
        ?>
        </span>
    </div>
